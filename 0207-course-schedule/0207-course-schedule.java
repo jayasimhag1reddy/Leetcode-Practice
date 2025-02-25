@@ -4,32 +4,36 @@ class Solution {
         for(int i=0;i<n;i++){
             al.add(new ArrayList<>());
         }
-        int[] deg=new int[n];
+        int[] indeg=new int[n];
+        int c=0;
         for(int[] ar:pre){
-            deg[ar[1]]++;
             al.get(ar[0]).add(ar[1]);
+            indeg[ar[1]]++;
         }
         Queue<Integer> q=new LinkedList<>();
-        int cnt=0;
         for(int i=0;i<n;i++){
-            if(deg[i]==0){
+            if(indeg[i]==0){
                 q.add(i);
-                cnt++;
+                c++;
             }
         }
         while(!q.isEmpty()){
-            int nod=q.poll();
-            for(int i:al.get(nod)){
-                --deg[i];
-                if(deg[i]==0){
+            int tmp=q.poll();
+            for(int i:al.get(tmp)){
+                --indeg[i];
+                if(indeg[i]==0){
                     q.add(i);
-                    cnt++;
+                    c++;
                 }
             }
         }
-        return cnt==n;
+        return c==n;
+
+
     }
 }
 
 
-    
+
+
+
