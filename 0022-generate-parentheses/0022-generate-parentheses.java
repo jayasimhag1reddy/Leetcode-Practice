@@ -4,16 +4,16 @@ class Solution {
         helper(0,0,n,"",ans);
         return ans;
     }
-    public void helper(int open,int close,int n,String res,List<String> ans){
-        if(close==n){
-            ans.add(res);
+    public void helper(int open,int close,int n,String s,List<String> ans){
+        if(open == n && close==n){
+            ans.add(s);
             return;
         }
         if(open<n){
-            helper(open+1,close,n,res+"(",ans);
+            helper(open+1,close,n,s+"(",ans);
         }
         if(close<open){
-            helper(open,close+1,n,res+")",ans);
+            helper(open,close+1,n,s+")",ans);
         }
     }
 }
