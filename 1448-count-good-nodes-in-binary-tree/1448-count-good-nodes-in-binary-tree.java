@@ -15,15 +15,18 @@
  */
 class Solution {
     public int goodNodes(TreeNode root) {
-       return helper(root,root.val);
+        int[] ans=new int[1];
+        helper(root,Integer.MIN_VALUE,ans);
+        return ans[0];
     }
-    public int helper(TreeNode root,int max){
-        if(root==null)return 0;
+    public void helper(TreeNode root,int max,int[] ans){
+        if(root==null){
+            return;
+        }
         if(root.val>=max){
-            return 1+helper(root.left,root.val)+helper(root.right,root.val);
+           ans[0]++;
         }
-        else{
-            return helper(root.left,max)+helper(root.right,max);
-        }
+        helper(root.left,Math.max(max,root.val),ans);
+        helper(root.right,Math.max(max,root.val),ans);
     }
 }
